@@ -1,10 +1,17 @@
-import { flags, SfdxCommand } from "@salesforce/command";
+import { core, flags, SfdxCommand } from "@salesforce/command";
 import { file2CV } from "../../../../common/file2CV";
 import { Record } from "../../../../common/typeDefs";
 
+// Initialize Messages with the current plugin directory
+core.Messages.importMessagesDirectory(__dirname);
+
+// Load the specific messages for this file.
+// Messages from @salesforce/command, @salesforce/core,
+// or any library that is using the messages framework can also be loaded this way.
+const messages = core.Messages.loadMessages('yourPluginName', 'org');
+
 export default class Upload extends SfdxCommand {
-  public static description =
-    "Upload multiple files based on a csv as standalone files or linked to records. The csv must have the following headers: Title, PathOnClient. The csv may have the following headers: FirstPublishLocationId. This utility uses the same setup as [Salesforce Dataloader for files](https://help.salesforce.com/articleView?id=000314772&type=1&mode=1).";
+  public static description = messages.getMessage('commandDescription');
 
   public static examples = [
     `sfdx chipp:data:files:upload -p ~/FilesToUpload.csv`,
@@ -13,7 +20,7 @@ export default class Upload extends SfdxCommand {
   protected static flagsConfig = {
     pathtocsv: flags.filepath({
       char: "p",
-      description: "path to csv",
+      description: messages.getMessage('filepathFlagDescription'),
       required: true,
     }),
   };
