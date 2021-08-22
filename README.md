@@ -9,7 +9,7 @@ Steampunk&#39;s SFDX Data Plugin
 [![License](https://img.shields.io/npm/l/@steampunk/sfdx-steampunk-data.svg)](https://www.npmjs.com/package/@steampunk/sfdx-steampunk-data)
 
 <!-- toc -->
-* [Debugging your plugin](#debugging-your-plugin)
+
 <!-- tocstop -->
 <!-- install -->
 <!-- usage -->
@@ -26,28 +26,22 @@ USAGE
 ```
 <!-- usagestop -->
 <!-- commands -->
-* [`sfdx hello:org [-n <string>] [-f] [-v <string>] [-u <string>] [--apiversion <string>] [--json] [--loglevel trace|debug|info|warn|error|fatal|TRACE|DEBUG|INFO|WARN|ERROR|FATAL]`](#sfdx-helloorg--n-string--f--v-string--u-string---apiversion-string---json---loglevel-tracedebuginfowarnerrorfataltracedebuginfowarnerrorfatal)
+* [`sfdx punk:data:files:upload -p <filepath> [-u <string>] [--apiversion <string>] [--json] [--loglevel trace|debug|info|warn|error|fatal|TRACE|DEBUG|INFO|WARN|ERROR|FATAL]`](#sfdx-punkdatafilesupload--p-filepath--u-string---apiversion-string---json---loglevel-tracedebuginfowarnerrorfataltracedebuginfowarnerrorfatal)
 
-## `sfdx hello:org [-n <string>] [-f] [-v <string>] [-u <string>] [--apiversion <string>] [--json] [--loglevel trace|debug|info|warn|error|fatal|TRACE|DEBUG|INFO|WARN|ERROR|FATAL]`
+## `sfdx punk:data:files:upload -p <filepath> [-u <string>] [--apiversion <string>] [--json] [--loglevel trace|debug|info|warn|error|fatal|TRACE|DEBUG|INFO|WARN|ERROR|FATAL]`
 
-print a greeting and your org IDs
+upload multiple files based on a csv as standalone files or linked to records; required fields: Title, PathOnClient; optional fields: FirstPublishLocationId
 
 ```
-print a greeting and your org IDs
-
 USAGE
-  $ sfdx hello:org [-n <string>] [-f] [-v <string>] [-u <string>] [--apiversion <string>] [--json] [--loglevel 
+  $ sfdx punk:data:files:upload -p <filepath> [-u <string>] [--apiversion <string>] [--json] [--loglevel 
   trace|debug|info|warn|error|fatal|TRACE|DEBUG|INFO|WARN|ERROR|FATAL]
 
 OPTIONS
-  -f, --force                                                                       example boolean flag
-  -n, --name=name                                                                   name to print
+  -p, --pathtocsv=pathtocsv                                                         (required) path to csv
 
   -u, --targetusername=targetusername                                               username or alias for the target
                                                                                     org; overrides default target org
-
-  -v, --targetdevhubusername=targetdevhubusername                                   username or alias for the dev hub
-                                                                                    org; overrides default dev hub org
 
   --apiversion=apiversion                                                           override the api version used for
                                                                                     api requests made by this command
@@ -57,12 +51,9 @@ OPTIONS
   --loglevel=(trace|debug|info|warn|error|fatal|TRACE|DEBUG|INFO|WARN|ERROR|FATAL)  [default: warn] logging level for
                                                                                     this command invocation
 
-EXAMPLES
-  $ sfdx hello:org --targetusername myOrg@example.com --targetdevhubusername devhub@org.com
-     Hello world! This is org: MyOrg and I will be around until Tue Mar 20 2018!
-     My hub org id is: 00Dxx000000001234
-  
-  $ sfdx hello:org --name myname --targetusername myOrg@example.com
-     Hello myname! This is org: MyOrg and I will be around until Tue Mar 20 2018!
+EXAMPLE
+  sfdx chipp:data:files:upload -p ~/FilesToUpload.csv
 ```
+
+_See code: [src/commands/punk/data/files/upload.ts](https://github.com/SteampunkFoundry/sfdx-steampunk-data/blob/v0.1.0/src/commands/punk/data/files/upload.ts)_
 <!-- commandsstop -->
