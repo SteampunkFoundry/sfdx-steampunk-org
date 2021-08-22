@@ -8,7 +8,7 @@ core.Messages.importMessagesDirectory(__dirname);
 // Load the specific messages for this file.
 // Messages from @salesforce/command, @salesforce/core,
 // or any library that is using the messages framework can also be loaded this way.
-const messages = core.Messages.loadMessages('sfdx-steampunk-data', 'upload');
+const messages = core.Messages.loadMessages('@steampunk/sfdx-steampunk-data', 'upload');
 
 export default class Upload extends SfdxCommand {
   public static description = messages.getMessage('commandDescription');

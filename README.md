@@ -14,11 +14,11 @@ Steampunk&#39;s SFDX Data Plugin
 <!-- install -->
 <!-- usage -->
 ```sh-session
-$ npm install -g sfdx-steampunk-data
+$ npm install -g @steampunk/sfdx-steampunk-data
 $ sfdx COMMAND
 running command...
 $ sfdx (-v|--version|version)
-sfdx-steampunk-data/0.1.0 win32-x64 node-v16.7.0
+@steampunk/sfdx-steampunk-data/0.1.0 win32-x64 node-v16.7.0
 $ sfdx --help [COMMAND]
 USAGE
   $ sfdx COMMAND

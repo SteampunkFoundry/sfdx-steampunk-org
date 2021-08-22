@@ -1,5 +1,5 @@
 {
-  "name": "sfdx-steampunk-data",
+  "name": "@steampunk/sfdx-steampunk-data",
   "description": "Steampunk's SFDX Data Plugin",
   "version": "0.1.0",
   "author": "Steampunk",
