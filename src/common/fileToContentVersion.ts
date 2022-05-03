@@ -1,10 +1,10 @@
 import { Connection } from '@salesforce/core/lib/connection';
 
-import { CreateResult, QueryResult, Record, ContentVersionCreateRequest, ContentVersion } from './typeDefs';
+import { CreateResult, QueryResult, Record, ContentVersionCreateRequest, ContentVersion } from './typeDefinitions';
 
 import * as fs from 'fs-extra';
 
-export async function file2CV(conn: Connection, filepath: string, name?: string, firstpublishlocationid?: string): Promise<Record> {
+export async function fileToContentVersion(conn: Connection, filepath: string, name?: string, firstpublishlocationid?: string): Promise<Record> {
     const cvcr: ContentVersionCreateRequest = {
         FirstPublishLocationId: firstpublishlocationid,
         PathOnClient: filepath,

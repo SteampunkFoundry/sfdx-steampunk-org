@@ -1,6 +1,6 @@
 import { core, flags, SfdxCommand } from "@salesforce/command";
-import { file2CV } from "../../../../common/file2CV";
-import { Record } from "../../../../common/typeDefs";
+import { fileToContentVersion } from "../../../../common/fileToContentVersion";
+import { Record } from "../../../../common/typeDefinitions";
 
 // Initialize Messages with the current plugin directory
 core.Messages.importMessagesDirectory(__dirname);
@@ -85,7 +85,7 @@ export default class Upload extends SfdxCommand {
       let failure = [];
       this.ux.startSpinner(`Loading file ${i + 1}`);
       try {
-        const CV = (await file2CV(
+        const CV = (await fileToContentVersion(
           conn,
           file.PathOnClient,
           file.Title,
