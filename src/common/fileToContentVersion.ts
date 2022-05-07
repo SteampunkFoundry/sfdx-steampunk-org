@@ -1,10 +1,8 @@
-import { Connection } from '@salesforce/core/lib/connection';
-
-import { CreateResult, QueryResult, Record, ContentVersionCreateRequest, ContentVersion } from './typeDefinitions';
-
 import * as fs from 'fs-extra';
+import { Connection } from '@salesforce/core/lib/connection';
+import { ContentVersionCreateResult, ContentVersionCreateRequest, QueryResult, ContentVersion } from './typeDefinitions';
 
-export async function fileToContentVersion(conn: Connection, filepath: string, name?: string, firstpublishlocationid?: string): Promise<Record> {
+export async function fileToContentVersion(conn: Connection, filepath: string, name?: string, firstpublishlocationid?: string): Promise<ContentVersion> {
     const cvcr: ContentVersionCreateRequest = {
         FirstPublishLocationId: firstpublishlocationid,
         PathOnClient: filepath,
@@ -30,8 +28,8 @@ export async function fileToContentVersion(conn: Connection, filepath: string, n
         url: `/services/data/v${conn.getApiVersion()}/sobjects/ContentVersion`,
         formData,
         method: 'POST'
-    } as any)) as unknown) as CreateResult;
+    } as any)) as unknown) as ContentVersionCreateResult;
 
-    const result = (await conn.query(`Select Id, ContentDocumentId from ContentVersion where Id='${CV.id}'`)) as QueryResult;
+    const result = (await conn.query(`SELECT Id, ContentDocumentId FROM ContentVersion WHERE Id='${CV.id}'`)) as QueryResult;
     return result.records[0] as ContentVersion;
 }

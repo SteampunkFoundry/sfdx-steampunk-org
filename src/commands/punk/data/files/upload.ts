@@ -1,25 +1,29 @@
-import { core, flags, SfdxCommand } from "@salesforce/command";
+
+import * as csv from 'csv-parser';
+import * as fs from 'fs-extra';
+import { flags, SfdxCommand } from '@salesforce/command';
+import { Connection, Messages } from '@salesforce/core';
 import { fileToContentVersion } from "../../../../common/fileToContentVersion";
-import { Record } from "../../../../common/typeDefinitions";
+import { ContentVersion } from "../../../../common/typeDefinitions";
 
 // Initialize Messages with the current plugin directory
-core.Messages.importMessagesDirectory(__dirname);
+Messages.importMessagesDirectory(__dirname);
 
 // Load the specific messages for this file.
 // Messages from @salesforce/command, @salesforce/core,
 // or any library that is using the messages framework can also be loaded this way.
-const messages = core.Messages.loadMessages('@steampunk/sfdx-steampunk-data', 'upload');
+const messages = Messages.loadMessages('@steampunk/sfdx-steampunk-data', 'upload');
 
 export default class Upload extends SfdxCommand {
   public static description = messages.getMessage('commandDescription');
 
   public static examples = [
-    `sfdx chipp:data:files:upload -p ~/FilesToUpload.csv`,
+    `sfdx punk:data:files:upload -f ~/FilesToUpload.csv`,
   ];
 
   protected static flagsConfig = {
-    pathtocsv: flags.filepath({
-      char: "p",
+    filepath: flags.filepath({
+      char: "f",
       description: messages.getMessage('filepathFlagDescription'),
       required: true,
     }),
@@ -28,8 +32,6 @@ export default class Upload extends SfdxCommand {
   protected static requiresUsername = true;
 
   private async readFile(filePath: string): Promise<any> {
-    const csv = require("csv-parser");
-    const fs = require("fs");
     let rows = [];
 
     return new Promise<any>((resolve) => {
@@ -48,7 +50,7 @@ export default class Upload extends SfdxCommand {
     // this.org is guaranteed because requiresUsername=true, as opposed to supportsUsername
     const conn = this.org.getConnection();
 
-    const csvFilePath = this.flags.pathtocsv;
+    const csvFilePath = this.flags.filepath;
 
     this.ux.startSpinner("Reading CSV");
 
@@ -83,14 +85,14 @@ export default class Upload extends SfdxCommand {
     for (let [i, file] of filesToUpload.entries()) {
       let success = [];
       let failure = [];
-      this.ux.startSpinner(`Loading file ${i + 1}`);
+      this.ux.startSpinner(`Loading file ${i + 1} of ${filesToUpload.length}`);
       try {
         const CV = (await fileToContentVersion(
           conn,
           file.PathOnClient,
           file.Title,
           file.FirstPublishLocationId
-        )) as Record;
+        )) as ContentVersion;
 
         file.ContentDocumentId = CV.ContentDocumentId;
         success.push(file);

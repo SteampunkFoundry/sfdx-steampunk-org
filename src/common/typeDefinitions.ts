@@ -1,12 +1,17 @@
-interface ContentVersion extends Record {
+interface BasicRecord {
+  Id: string;
+  Name?: string;
+}
+
+interface ContentDocument extends BasicRecord {
+  LatestPublishedVersionId: string;
+}
+
+interface ContentVersion extends BasicRecord {
   Title: string;
   FileExtension: string;
   VersionData: string;
   ContentDocumentId?: string;
-}
-
-interface ContentDocument extends Record {
-  LatestPublishedVersionId: string;
 }
 
 interface ContentVersionCreateRequest {
@@ -15,19 +20,7 @@ interface ContentVersionCreateRequest {
   Title?: string;
 }
 
-interface Record {
-  attributes: object;
-  Id: string;
-
-  Name?: string;
-
-  ContentDocumentId?: string;
-
-  LiveAgentChatUrl?: string;
-  LiveAgentContentUrl?: string;
-}
-
-interface CreateResult {
+interface ContentVersionCreateResult {
   id: string;
   success: boolean;
   errors: string[];
@@ -36,16 +29,16 @@ interface CreateResult {
 }
 
 interface QueryResult {
-totalSize: number;
-done: boolean;
-records: Record[];
+  totalSize: number;
+  done: boolean;
+  records: BasicRecord[];
 }
 
 export {
-  Record,
+  BasicRecord,
   ContentVersion,
   ContentDocument,
-  CreateResult,
+  ContentVersionCreateResult,
   ContentVersionCreateRequest,
   QueryResult
 };
