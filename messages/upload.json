@@ -1,5 +1,0 @@
-{
-  "commandDescription": "upload multiple files based on a csv as standalone files or linked to records; required fields: Title, PathOnClient; optional fields: FirstPublishLocationId",
-  "filepathFlagDescription": "path to csv",
-  "errorNoOrgResults": "No results found for the org '%s'."
-}

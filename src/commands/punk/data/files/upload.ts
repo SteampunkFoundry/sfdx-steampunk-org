@@ -17,9 +17,7 @@ const messages = Messages.loadMessages('@steampunk/sfdx-steampunk-data', 'upload
 export default class Upload extends SfdxCommand {
   public static description = messages.getMessage('commandDescription');
 
-  public static examples = [
-    `sfdx punk:data:files:upload -f ~/FilesToUpload.csv`,
-  ];
+  public static examples = messages.getMessage('commandExamples');
 
   protected static flagsConfig = {
     filepath: flags.filepath({
