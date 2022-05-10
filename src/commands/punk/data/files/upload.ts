@@ -2,7 +2,7 @@
 import * as csv from 'csv-parser';
 import * as fs from 'fs-extra';
 import { flags, SfdxCommand } from '@salesforce/command';
-import { Connection, Messages } from '@salesforce/core';
+import { Messages } from '@salesforce/core';
 import { fileToContentVersion } from "../../../../common/fileToContentVersion";
 import { ContentVersion } from "../../../../common/typeDefinitions";
 
@@ -17,7 +17,7 @@ const messages = Messages.loadMessages('@steampunk/sfdx-steampunk-data', 'upload
 export default class Upload extends SfdxCommand {
   public static description = messages.getMessage('commandDescription');
 
-  public static examples = messages.getMessage('commandExamples');
+  public static examples = [messages.getMessage('commandExamples')];
 
   protected static flagsConfig = {
     filepath: flags.filepath({
