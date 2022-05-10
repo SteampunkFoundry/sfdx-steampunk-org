@@ -18,7 +18,7 @@ $ npm install -g @steampunk/sfdx-steampunk-data
 $ sfdx COMMAND
 running command...
 $ sfdx (-v|--version|version)
-@steampunk/sfdx-steampunk-data/0.1.0 win32-x64 node-v16.7.0
+@steampunk/sfdx-steampunk-data/0.1.2 win32-x64 node-v16.7.0
 $ sfdx --help [COMMAND]
 USAGE
   $ sfdx COMMAND
@@ -26,19 +26,19 @@ USAGE
 ```
 <!-- usagestop -->
 <!-- commands -->
-* [`sfdx punk:data:files:upload -p <filepath> [-u <string>] [--apiversion <string>] [--json] [--loglevel trace|debug|info|warn|error|fatal|TRACE|DEBUG|INFO|WARN|ERROR|FATAL]`](#sfdx-punkdatafilesupload--p-filepath--u-string---apiversion-string---json---loglevel-tracedebuginfowarnerrorfataltracedebuginfowarnerrorfatal)
+* [`sfdx punk:data:files:upload -f <filepath> [-u <string>] [--apiversion <string>] [--json] [--loglevel trace|debug|info|warn|error|fatal|TRACE|DEBUG|INFO|WARN|ERROR|FATAL]`](#sfdx-punkdatafilesupload--f-filepath--u-string---apiversion-string---json---loglevel-tracedebuginfowarnerrorfataltracedebuginfowarnerrorfatal)
 
-## `sfdx punk:data:files:upload -p <filepath> [-u <string>] [--apiversion <string>] [--json] [--loglevel trace|debug|info|warn|error|fatal|TRACE|DEBUG|INFO|WARN|ERROR|FATAL]`
+## `sfdx punk:data:files:upload -f <filepath> [-u <string>] [--apiversion <string>] [--json] [--loglevel trace|debug|info|warn|error|fatal|TRACE|DEBUG|INFO|WARN|ERROR|FATAL]`
 
-upload multiple files based on a csv as standalone files or linked to records; required fields: Title, PathOnClient; optional fields: FirstPublishLocationId
+Upload multiple files based on a csv
 
 ```
 USAGE
-  $ sfdx punk:data:files:upload -p <filepath> [-u <string>] [--apiversion <string>] [--json] [--loglevel 
+  $ sfdx punk:data:files:upload -f <filepath> [-u <string>] [--apiversion <string>] [--json] [--loglevel 
   trace|debug|info|warn|error|fatal|TRACE|DEBUG|INFO|WARN|ERROR|FATAL]
 
 OPTIONS
-  -p, --pathtocsv=pathtocsv                                                         (required) path to csv
+  -f, --filepath=filepath                                                           (required) Path to csv file
 
   -u, --targetusername=targetusername                                               username or alias for the target
                                                                                     org; overrides default target org
@@ -52,8 +52,18 @@ OPTIONS
                                                                                     this command invocation
 
 EXAMPLE
-  sfdx chipp:data:files:upload -p ~/FilesToUpload.csv
+
+    $ sfdx punk:data:files:upload -f ~/FilesToUpload.csv
+
+    You will need to format a csv with the following headers.
+
+    Required:
+      - PathOnClient
+      - Title
+
+    Optional:
+      - FirstPublishLocationId
 ```
 
-_See code: [src/commands/punk/data/files/upload.ts](https://github.com/SteampunkFoundry/sfdx-steampunk-data/blob/v0.1.0/src/commands/punk/data/files/upload.ts)_
+_See code: [src/commands/punk/data/files/upload.ts](https://github.com/SteampunkFoundry/steampunk-sfdx-data/blob/v0.1.2/src/commands/punk/data/files/upload.ts)_
 <!-- commandsstop -->
