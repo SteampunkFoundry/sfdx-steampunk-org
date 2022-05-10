@@ -1,44 +1,15 @@
-interface BasicRecord {
-  Id: string;
-  Name?: string;
-}
-
-interface ContentDocument extends BasicRecord {
-  LatestPublishedVersionId: string;
-}
-
-interface ContentVersion extends BasicRecord {
-  Title: string;
-  FileExtension: string;
-  VersionData: string;
-  ContentDocumentId?: string;
-}
-
-interface ContentVersionCreateRequest {
-  FirstPublishLocationId?: string;
-  PathOnClient: string;
-  Title?: string;
-}
-
-interface ContentVersionCreateResult {
-  id: string;
-  success: boolean;
-  errors: string[];
+interface ApiLimit {
   name: string;
-  message: string;
+  max: string;
+  remaining: number;
 }
 
-interface QueryResult {
-  totalSize: number;
-  done: boolean;
-  records: BasicRecord[];
+interface CreateOrgResult {
+  orgId: string;
+  username: string;
 }
 
 export {
-  BasicRecord,
-  ContentVersion,
-  ContentDocument,
-  ContentVersionCreateResult,
-  ContentVersionCreateRequest,
-  QueryResult
+  ApiLimit,
+  CreateOrgResult
 };

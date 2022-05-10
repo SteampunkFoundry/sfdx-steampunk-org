@@ -1,12 +1,12 @@
 {
-  "name": "@steampunk/sfdx-steampunk-data",
-  "description": "Steampunk's SFDX Data Plugin",
-  "version": "0.1.3",
+  "name": "@steampunk/sfdx-steampunk-org",
+  "description": "Steampunk's SFDX Org Plugin",
+  "version": "0.1.0",
   "author": "Steampunk",
   "license": "MIT",
-  "homepage": "https://github.com/SteampunkFoundry/sfdx-steampunk-data",
-  "repository": "SteampunkFoundry/sfdx-steampunk-data",
-  "bugs": "https://github.com/SteampunkFoundry/sfdx-steampunk-data/issues",
+  "homepage": "https://github.com/SteampunkFoundry/sfdx-steampunk-org",
+  "repository": "SteampunkFoundry/sfdx-steampunk-org",
+  "bugs": "https://github.com/SteampunkFoundry/sfdx-steampunk-org/issues",
   "keywords": [
     "sfdx-plugin"
   ],
@@ -24,7 +24,7 @@
     "bin": "sfdx",
     "topics": {
       "punk:data": {
-        "description": "Commands for working with data."
+        "description": "Commands for working with orgs."
       }
     },
     "devPlugins": [
@@ -35,13 +35,12 @@
     "@oclif/command": "^1.8.16",
     "@oclif/config": "^1.18.3",
     "@oclif/errors": "^1.3.5",
-    "@salesforce/cli-plugins-testkit": "^1.5.35",
     "@salesforce/command": "^4.2.1",
     "@salesforce/core": "^2.35.3",
-    "csv-parser": "^3.0.0",
-    "csv-writer": "^1.6.0",
-    "node-fetch": "^2.6.0",
-    "fs-extra": "^10.0.1",
+    "@salesforce/kit": "^1.5.17",
+    "@salesforce/plugin-org": "^1.12.0",
+    "@salesforce/plugin-limits": "^2.0.0",
+    "@salesforce/cli-plugins-testkit": "^1.5.35",
     "tslib": "^2.3.1"
   },
   "devDependencies": {
