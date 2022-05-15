@@ -18,5 +18,6 @@ interface Result {
 
 export {
   ApiLimit,
+  DevhubResult,
   Result
 };
