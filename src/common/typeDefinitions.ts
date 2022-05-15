@@ -1,15 +1,22 @@
-interface ApiLimit {
+type ApiLimit = {
   name: string;
-  max: string;
+  max: number;
   remaining: number;
+};
+
+interface DevhubResult {
+  devhubusername: string;
+  available: boolean;
 }
 
-interface CreateOrgResult {
-  orgId: string;
-  username: string;
+interface Result {
+  [key: string]: {
+    Max: number;
+    Remaining: number;
+  };
 }
 
 export {
   ApiLimit,
-  CreateOrgResult
+  Result
 };

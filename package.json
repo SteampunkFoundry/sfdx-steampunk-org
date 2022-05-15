@@ -23,7 +23,7 @@
     "commands": "./lib/commands",
     "bin": "sfdx",
     "topics": {
-      "punk:data": {
+      "punk:org": {
         "description": "Commands for working with orgs."
       }
     },
@@ -38,15 +38,14 @@
     "@salesforce/command": "^4.2.1",
     "@salesforce/core": "^2.35.3",
     "@salesforce/kit": "^1.5.17",
-    "@salesforce/plugin-org": "^1.12.0",
     "@salesforce/plugin-limits": "^2.0.0",
-    "@salesforce/cli-plugins-testkit": "^1.5.35",
     "tslib": "^2.3.1"
   },
   "devDependencies": {
     "@oclif/dev-cli": "^1.26.10",
     "@oclif/plugin-help": "^5.1.12",
     "@oclif/test": "^2.1.0",
+    "@salesforce/cli-plugins-testkit": "^1.5.35",
     "@salesforce/dev-config": "^3.0.1",
     "@types/chai": "^4.3.0",
     "@types/mocha": "^9.0.0",
