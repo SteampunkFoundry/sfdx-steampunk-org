@@ -1,5 +1,6 @@
+import { EOL } from 'os';
 import { flags, FlagsConfig, SfdxCommand } from '@salesforce/command';
-import { Aliases, Config, Lifecycle, Messages, Org, scratchOrgCreate, ScratchOrgRequest, SfdxError } from '@salesforce/core';
+import { Aliases, Config, Lifecycle, Messages, Org, ScratchOrgRequest, SfdxError } from '@salesforce/core';
 import { Duration } from '@salesforce/kit';
 import { ApiLimit, DevhubResult, Result } from "../../../../common/typeDefinitions";
 
@@ -8,8 +9,7 @@ const messages = Messages.loadMessages('@steampunk/sfdx-steampunk-org', 'create'
 
 export default class Create extends SfdxCommand {
   public static readonly description = messages.getMessage('description');
-  public static readonly examples = messages.getMessage('examples');
-
+  public static readonly examples = messages.getMessage('examples').split(EOL);
   public static readonly requiresProject = false;
   public static readonly supportsDevhubUsername = false;
   public static readonly supportsUsername = false;
