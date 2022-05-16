@@ -1,7 +1,8 @@
 module.exports = {
   description: `Create a scratch org provided a pool of devhubs`,
   examples: [
-    `$ sfdx punk:org:pool:create -v "MyDevHub1, MyDevHub2, MyDevHub3"`
+    `$ sfdx punk:org:pool:create -p "MyDevHub1,MyDevHub2,MyDevHub3" -f config/project-scratch-def.json`,
+    `$ sfdx punk:org:pool:create -p "MyDevHub1,MyDevHub2,MyDevHub3" -f config/project-scratch-def.json --setalias MyScratchOrg --setdefaultusername`
   ],
   flags: {
     "devhubUsernames": "list of devhub usernames to pool from",
@@ -15,5 +16,7 @@ module.exports = {
     "durationDays": "duration of the scratch org (in days) (default:7, min:1, max:30)",
     "retry": "Number of scratch org auth retries after scratch org is successfully signed up.",
     "wait": "the streaming client socket timeout (in minutes)"
-  }
+  },
+  noAvailableDevhubs: `All Devhubs in the pool are spent`,
+  scratchOrgCreateSuccess: `Successfully created scratch org: %s, username: %s.`
 };

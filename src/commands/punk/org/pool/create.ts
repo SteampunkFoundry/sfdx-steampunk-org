@@ -1,5 +1,5 @@
 import { flags, FlagsConfig, SfdxCommand } from '@salesforce/command';
-import { Messages, Org, scratchOrgCreate, ScratchOrgRequest, SfdxError } from '@salesforce/core';
+import { Aliases, Config, Lifecycle, Messages, Org, scratchOrgCreate, ScratchOrgRequest, SfdxError } from '@salesforce/core';
 import { Duration } from '@salesforce/kit';
 import { ApiLimit, DevhubResult, Result } from "../../../../common/typeDefinitions";
 
@@ -23,6 +23,7 @@ export default class Create extends SfdxCommand {
     definitionfile: flags.filepath({
       char: 'f',
       description: messages.getMessage('flags.definitionFile'),
+      required: true
     }),
     nonamespace: flags.boolean({
       char: 'n',
@@ -106,12 +107,32 @@ export default class Create extends SfdxCommand {
     return limits;
   }
 
+  private async setAliasAndDefaultUsername(username: string): Promise<void> {
+    const aliases = await Aliases.create(Aliases.getDefaultOptions());
+    if (this.flags.setalias) {
+      await aliases.updateValue(this.flags.setalias, username);
+      this.logger.debug('Set Alias: %s result: %s', this.flags.setalias);
+    }
+    if (this.flags.setdefaultusername) {
+      let config: Config;
+      try {
+        config = await Config.create({ isGlobal: false });
+      } catch {
+        config = await Config.create({ isGlobal: true });
+      }
+      const value = aliases.getKeysByValue(username)[0] || username;
+      const result = config.set(Config.DEFAULT_USERNAME, value);
+      await config.write();
+      this.logger.debug('Set defaultUsername: %s result: %s', this.flags.setdefaultusername, result);
+    }
+  }
+
   public async run(): Promise<any> {
     const args = [];
 
     // DEFINITIONFILE
     if (this.flags.definitionfile) {
-      args.push('--upgradetype');
+      args.push('--definitionfile');
       args.push(`${this.flags.definitionfile}`);
     }
 
@@ -157,11 +178,45 @@ export default class Create extends SfdxCommand {
     const availableDevhub = await this.determineDevhub(this.flags.devhubusernames);
 
     if (!availableDevhub) {
-      throw new SfdxError("All Devhubs in the pool are spent");
+      throw new SfdxError(messages.getMessage('noAvailableDevhubs'));
     }
 
-    this.ux.log(`Using devhub: ${availableDevhub}`)
+    this.ux.log(`Using devhub: ${availableDevhub}`);
 
-    //await org.Create.run(args);
+    const localOrg = await Org.create({
+      aliasOrUsername: availableDevhub
+    });
+
+    const createCommandOptions: ScratchOrgRequest = {
+      definitionfile: this.flags.definitionfile as string,
+      nonamespace: this.flags.nonamespace as boolean,
+      noancestors: this.flags.noancestors as boolean,
+      wait: this.flags.wait as Duration,
+      durationDays: this.flags.durationdays as number,
+      retry: this.flags.retry as number,
+      apiversion: this.flags.apiversion as string
+    };
+
+    const { username, scratchOrgInfo, authFields, warnings } = await localOrg.scratchOrgCreate(createCommandOptions);
+
+    await Lifecycle.getInstance().emit('scratchOrgInfo', scratchOrgInfo);
+
+    await this.setAliasAndDefaultUsername(username);
+
+    this.ux.log(messages.getMessage('scratchOrgCreateSuccess', [authFields.orgId, username]));
+
+    if (warnings.length > 0) {
+      warnings.forEach((warning) => {
+        this.ux.warn(warning);
+      });
+    }
+
+    return {
+      username,
+      scratchOrgInfo,
+      authFields,
+      warnings,
+      orgId: authFields.orgId,
+    };
   }
 }

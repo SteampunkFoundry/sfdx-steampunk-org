@@ -1,7 +1,7 @@
 {
   "packageDirectories": [
     {
-      "path": "sfdx-source/steampunk-sfdx-data",
+      "path": "sfdx-source/sfdx-steampunk-org",
       "default": true
     }
   ],
