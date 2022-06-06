@@ -1,7 +1,7 @@
 {
   "name": "@steampunk/sfdx-steampunk-org",
   "description": "Steampunk's SFDX Org Plugin",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "author": "Steampunk",
   "license": "MIT",
   "homepage": "https://github.com/SteampunkFoundry/sfdx-steampunk-org",

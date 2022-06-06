@@ -12,7 +12,6 @@ Steampunk&#39;s SFDX Org Plugin
 
 <!-- tocstop -->
 
-<!-- tocstop -->
 <!-- install -->
 <!-- usage -->
 ```sh-session
@@ -20,14 +19,13 @@ $ npm install -g @steampunk/sfdx-steampunk-org
 $ sfdx COMMAND
 running command...
 $ sfdx (-v|--version|version)
-@steampunk/sfdx-steampunk-org/0.1.0 win32-x64 node-v16.7.0
+@steampunk/sfdx-steampunk-org/0.1.1 win32-x64 node-v16.15.1
 $ sfdx --help [COMMAND]
 USAGE
   $ sfdx COMMAND
 ...
 ```
 <!-- usagestop -->
-
 <!-- commands -->
 * [`sfdx punk:org:pool:create -p <array> -f <filepath> [-n] [-c] [-s] [-a <string>] [-w <minutes>] [-d <integer>] [--json] [--loglevel trace|debug|info|warn|error|fatal|TRACE|DEBUG|INFO|WARN|ERROR|FATAL]`](#sfdx-punkorgpoolcreate--p-array--f-filepath--n--c--s--a-string--w-minutes--d-integer---json---loglevel-tracedebuginfowarnerrorfataltracedebuginfowarnerrorfatal)
 
@@ -76,5 +74,5 @@ EXAMPLES
   MyScratchOrg --setdefaultusername
 ```
 
-_See code: [src/commands/punk/org/pool/create.ts](https://github.com/SteampunkFoundry/sfdx-steampunk-org/blob/v0.1.0/src/commands/punk/org/pool/create.ts)_
+_See code: [src/commands/punk/org/pool/create.ts](https://github.com/SteampunkFoundry/sfdx-steampunk-org/blob/v0.1.1/src/commands/punk/org/pool/create.ts)_
 <!-- commandsstop -->
